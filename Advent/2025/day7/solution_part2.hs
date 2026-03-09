@@ -4,6 +4,7 @@
 type Pos       = (Int, Int)
 type Grid      = [[Char]]
 type BeamStart = (Int, Int)
+type Memo = [((Int,Int), Int)]
 
 -- ------------------------------------------------------------
 -- Grid helpers
@@ -59,7 +60,6 @@ buildSplitterIndex grid =
 --   With memo:    we compute timelines(5,3) once, store the answer,
 --                 and just look it up the second time.
 -- ------------------------------------------------------------
-type Memo = [((Int,Int), Int)]
 
 memoLookup :: (Int,Int) -> Memo -> Maybe Int
 memoLookup _ []         = Nothing
