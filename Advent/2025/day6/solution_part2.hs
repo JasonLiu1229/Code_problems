@@ -222,21 +222,19 @@ readNumberFromCol rows col =
 -- ------------------------------------------------------------
 evalBlock :: [String] -> Integer
 evalBlock blockLines =
-  let -- keep full width; don't trim lines here, we need column positions
-      nonEmpty = blockLines
-      bottom   = last nonEmpty
+  let bottom   = last blockLines
       opChar   = findOp bottom
       w        = length bottom
 
       -- a column counts as a number if it has at least one digit above
-      colHasDigit c = any (\row -> isDigit (row !! c)) (init nonEmpty)
+      colHasDigit c = any (\row -> isDigit (row !! c)) (init blockLines)
 
       cols     = [ c | c <- [0 .. w - 1], colHasDigit c ]
 
       -- process columns from right to left
       colsRTL  = reverse cols
 
-      nums     = map (readNumberFromCol nonEmpty) colsRTL
+      nums     = map (readNumberFromCol blockLines) colsRTL
   in case opChar of
        '+' -> foldl1 (+) nums
        '*' -> foldl1 (*) nums

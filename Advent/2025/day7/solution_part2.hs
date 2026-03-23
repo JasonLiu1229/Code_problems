@@ -76,7 +76,7 @@ memoInsert k v ((k2,v2):rest)
 -- ------------------------------------------------------------
 -- Count timelines 
 --
--- We use recursion (DFS).
+-- We use recursion.
 -- Each call asks: "how many timelines does THIS beam produce?"
 --
 -- Base case:   no splitter below → 1 timeline (beam exits)
